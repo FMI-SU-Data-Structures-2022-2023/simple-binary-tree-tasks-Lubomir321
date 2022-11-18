@@ -36,10 +36,24 @@ int sumElementsAtLevel(Node* tree, unsigned level) {
     return sumElementsAtLevel(tree->left, level - 1)
         + sumElementsAtLevel(tree->right, level - 1);
 }
-
-bool isSymmetric(Node* tree)
+bool isMirror(struct Node* root1, struct Node* root2)
 {
+    if (root1 == NULL && root2 == NULL)
+        return true;
+ 
+    
+    if (root1 && root2 && root1->key == root2->key)
+        return isMirror(root1->left, root2->right)
+               && isMirror(root1->right, root2->left);
+ 
+    
     return false;
+}
+ 
+
+bool isSymmetric(struct Node* tree)
+{
+    return isMirror(root, root);
 }
 
 bool isBST(Node* tree)
