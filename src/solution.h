@@ -14,6 +14,9 @@ int sumElementsAtLevel(Node*, unsigned);
 int height(Node*);
 bool isBST(Node*);
 bool isSymmetric(Node*);
+bool isSorted(std::vector<int>&);
+void getInOrder(Node* tree, std::vector<int>& res);
+bool helpSym(Node* leftTree, Node* rightTree);
 
 #define WEEK6_TREE_H
 
