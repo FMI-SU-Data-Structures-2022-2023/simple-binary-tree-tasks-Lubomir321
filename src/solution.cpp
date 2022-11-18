@@ -53,7 +53,7 @@ bool isMirror(struct Node* root1, struct Node* root2)
 
 bool isSymmetric(struct Node* tree)
 {
-    return isMirror(root, root);
+    return isMirror(tree, tree);
 }
 
 bool isBST(Node* tree)
