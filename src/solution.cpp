@@ -1,6 +1,6 @@
 #include "solution.h"
 #include <iostream>
-#include <vector>
+
 
 int countElements(Node* tree) {
    if (tree == NULL)
@@ -37,49 +37,13 @@ int sumElementsAtLevel(Node* tree, unsigned level) {
         + sumElementsAtLevel(tree->right, level - 1);
 }
 
-bool helpSym(Node* leftTree, Node* rightTree)
-{
-    if (!leftTree && !rightTree) return true;
-
-    if (!leftTree || !rightTree) return false;
-
-    if (leftTree->key == rightTree->key)
-        return helpSym(leftTree->right, rightTree->left) &&
-        helpSym(leftTree->left, rightTree->right);
-
-    return false;
-}
 bool isSymmetric(Node* tree)
 {
-    if (!tree) return true;
-    if (!tree->left && !tree->right) return true;
-    return helpSym(tree->left, tree->right);
+    return false;
 }
-void getInOrder(Node* tree, std::vector<int>& res)
-{
-    if (!tree) return;
 
-    getInOrder(tree->left, res);
-
-    res.push_back(tree->key);
-
-    getInOrder(tree->right, res);
-}
-bool isSorted(std::vector<int>& res)
-{
-    size_t size = res.size();
-
-    for (size_t i = 0; i < size - 1; i++)
-    {
-        if (res[i] > res[i + 1]) return false;
-    }
-
-    return true;
-}
 bool isBST(Node* tree)
 {
-    vector<int> inOrder;
-    getInOrder(tree, inOrder);
-    return isSorted(inOrder);
+   return false;
 }
 
