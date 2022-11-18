@@ -82,6 +82,4 @@ bool isBST(Node* tree)
     getInOrder(tree, inOrder);
     return isSorted(inOrder);
 }
-bool isSorted(std::vector<int>&);
-void getInOrder(Node* tree, std::vector<int>& res);
-bool helpSym(Node* leftTree, Node* rightTree);
+
