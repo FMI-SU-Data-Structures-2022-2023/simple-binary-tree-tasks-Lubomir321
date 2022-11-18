@@ -19,7 +19,7 @@ int countLeafs(Node* tree) {
 int height(Node* tree) {
    if (!tree)
         return 0;
-    return 1 + max(height(tree->left),height(tree->right));
+    return 1 + std::max(height(tree->left),height(tree->right));
 }
 
 int sumElements(Node* tree) {
