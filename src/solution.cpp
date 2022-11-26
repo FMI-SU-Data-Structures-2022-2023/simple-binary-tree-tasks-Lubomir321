@@ -1,63 +1,72 @@
 #include "solution.h"
 #include <iostream>
-
+#include <vector>
 
 int countElements(Node* tree) {
-   if (tree == NULL)
+    if (!tree)
         return 0;
-    return  1 + countElements(tree->left) + countElements(tree->right);
+    return 1 + countElements(tree->left) + countElements(tree->right);
 }
 
 int countLeafs(Node* tree) {
-     if (tree == NULL)
+    if (!tree)
         return 0;
-    if (tree->left == NULL && tree->right == NULL)
+    if (!tree->left && !tree->right)
         return 1;
     return countLeafs(tree->left) + countLeafs(tree->right);
 }
 
 int height(Node* tree) {
-   if (!tree)
+    if (!tree)
         return 0;
-    return 1 + std::max(height(tree->left),height(tree->right));
+    return 1 + std::max(height(tree->left), height(tree->right));
 }
 
 int sumElements(Node* tree) {
-    if (tree == NULL)
+    if (!tree)
         return 0;
     return tree->key + sumElements(tree->left) + sumElements(tree->right);
 }
 
 int sumElementsAtLevel(Node* tree, unsigned level) {
-    if (tree == NULL)
+    if (!tree)
         return 0;
-    if (!level)
+    if (level == 0)
         return tree->key;
-    return sumElementsAtLevel(tree->left, level - 1)
-        + sumElementsAtLevel(tree->right, level - 1);
+    return sumElementsAtLevel(tree->left, level- 1) + sumElementsAtLevel(tree->right, level - 1);
 }
-bool isMirror(struct Node* root1, struct Node* root2)
+bool helpIsSymmetric(Node* tree1, Node* tree2)
 {
-    if (root1 == NULL && root2 == NULL)
+    if (!tree1 && !tree2)
         return true;
- 
-    
-    if (root1 && root2 && root1->key == root2->key)
-        return isMirror(root1->left, root2->right)
-               && isMirror(root1->right, root2->left);
- 
-    
+
+    if (tree1 && tree2 && tree1->key == tree2->key)
+        return helpIsSymmetric(tree1->left, tree2->right) &&
+        helpIsSymmetric(tree1->right , tree2->left);
+
     return false;
 }
- 
-
-bool isSymmetric(struct Node* tree)
-{
-    return isMirror(tree, tree);
+bool isSymmetric(Node* tree) {
+    if (!tree)
+        return true;
+    return helpIsSymmetric(tree->left, tree->right);
 }
-
-bool isBST(Node* tree)
+void inOrder(Node* tree, std::vector<int>& v)
 {
-   return false;
-}
+    if (!tree)
+        return;
 
+    inOrder(tree->left, v);
+    v.push_back(tree->key);
+    inOrder(tree->right, v);
+}
+bool isBST(Node* tree) {
+    std::vector<int> v;
+    inOrder(tree, v);
+    for (int i = 0; i < v.size()- 1; i++)
+    {
+        if (v[i] > v[i + 1])
+            return false;
+    }
+    return true;
+}
